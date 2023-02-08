@@ -8,6 +8,8 @@ In this repository, we explore the potential methods that might be employed to t
 
 ![Facial landmarks](./docs/face_id_woman2.png)
 
+In an ideal setting, we would have access to some of the patient's real-life photos to try and perform the matching ourselves and quantify re-identification performance, however we do not have our own patient cohort. As a substitute, we use metrics such as the number of patients where we can accurately locate the face using standard face detection algorithms, or those where we can accurately place facial landmarks which are a key component of most face detection software. Finally, comparing to CT scan face reconstructions provides further quantification of our approaches.
+
 ## Installation
 
 ### Getting started
@@ -20,7 +22,22 @@ Follow instruction details [here](https://wiki.cancerimagingarchive.net/pages/vi
 ### System requirements
 Most of the code here was run on Colab, any working python installation >=3.8 should do the trick.
 
-## Experiments
+## Experiment details
+
+### Reconstructing faces
+The main pipeline follows: 3D voxel representation -> adaptive thresholding to keep relevant voxels -> selecting largest connected component -> generating mesh representations of isosurface using marching cubes algorithm -> ray casting to get a 2D image representation of a patient's face -> applying face detection and landmark placement algorithms for potential de-anonymization.
+
+### Denoising PET data
+
+#### Traditional approaches
 TODO
+#### Deep-learning based
+TODO
+
+### Facial recognition
+- Face detection is performed with [OpenCV Haar Feature-based Cascade Classifiers](https://docs.opencv.org/3.4/d2/d99/tutorial_js_face_detection.html). This works well on grayscale images and though it is dated, it remains easy to implement and obtains decent results. 
+- Landmark placement to create a Face Mesh is done using Google's [Mediapipe](https://google.github.io/mediapipe/). We need to be careful as these pipelines are tuned for RGB images and we are working with grayscale.
+
+
 ### File details
 TODO

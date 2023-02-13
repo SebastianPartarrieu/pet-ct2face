@@ -1,4 +1,4 @@
-from unet_blocks import *
+from .unet_blocks import *
 
 class UNET(nn.Module):
   def __init__(self,

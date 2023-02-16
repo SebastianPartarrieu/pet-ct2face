@@ -15,8 +15,9 @@ def find_skin(data, is_pet=False):
     else:
         otsu = threshold_otsu(data)
         data_bin = (data >= otsu)
-        labels = cc3d.connected_components(data_bin)
-    return otsu, data_bin, labels
+        
+    labels = cc3d.connected_components(data_bin)
+    return otsu, labels
 
 def generate_morpho(lab):
     morpho = lab.copy()

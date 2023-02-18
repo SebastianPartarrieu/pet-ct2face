@@ -27,5 +27,5 @@ class UNET(nn.Module):
     if self.noise:
       x = x + self.noise*torch.randn_like(x)
     x = self.conv(x)
-    x = torch.nn.ReLU()(x)
+    x = torch.nn.Sigmoid()(x)
     return x

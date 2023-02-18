@@ -27,4 +27,5 @@ class UNET(nn.Module):
     if self.noise:
       x = x + self.noise*torch.randn_like(x)
     x = self.conv(x)
+    x = torch.nn.Softmax(dim=1)(x)
     return x

@@ -26,6 +26,20 @@ def add_face_detection(mp_drawing,
         return annotated_image, counter
     else:
         return image, 0
+        
+def add_face_box_to_img(image, convert=True):
+  '''
+  Face bounding box obtained with open cv haar cascades.
+  Image modified inplace!
+  '''
+  face_cascade_name = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+  haar_cascade = cv2.CascadeClassifier(face_cascade_name)
+  faces_rect = haar_cascade.detectMultiScale(image, scaleFactor = 1.1,
+                                             minNeighbors = 3, minSize=(100, 100))
+  color_img = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+  for (x,y,w,h) in faces_rect:
+     cv2.rectangle(color_img, (x, y), (x+w, y+h), (220, 20, 60), 2)
+  return color_img, faces_rect
 
 def add_facial_landmarks(mp_drawing,
                          mp_face_mesh,
